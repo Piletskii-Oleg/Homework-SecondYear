@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNUnit", "MyNUnit\MyNUnit.csproj", "{857935CA-1546-49AC-9243-9BE32162B2BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNUnit.SDK", "MyNUnit.SDK\MyNUnit.SDK.csproj", "{AD021CDB-A510-4073-88A7-ABFB5907CBCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNUnit.Tests", "MyNUnit.Tests\MyNUnit.Tests.csproj", "{94571FE0-1C36-4EAD-86C5-884C3291CA3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{857935CA-1546-49AC-9243-9BE32162B2BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{857935CA-1546-49AC-9243-9BE32162B2BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{857935CA-1546-49AC-9243-9BE32162B2BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{857935CA-1546-49AC-9243-9BE32162B2BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD021CDB-A510-4073-88A7-ABFB5907CBCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD021CDB-A510-4073-88A7-ABFB5907CBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD021CDB-A510-4073-88A7-ABFB5907CBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD021CDB-A510-4073-88A7-ABFB5907CBCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94571FE0-1C36-4EAD-86C5-884C3291CA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94571FE0-1C36-4EAD-86C5-884C3291CA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94571FE0-1C36-4EAD-86C5-884C3291CA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94571FE0-1C36-4EAD-86C5-884C3291CA3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

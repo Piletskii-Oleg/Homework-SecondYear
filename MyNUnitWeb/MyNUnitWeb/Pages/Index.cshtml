@@ -1,0 +1,122 @@
+﻿@page
+@using MyNUnit.State
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h5>Upload MyNUnit test projects and get test results.</h5>
+</div>
+
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        <dl>
+            <dd>
+                <input type="file" name="files" class="form-control" multiple/>
+            </dd>
+            <input asp-page-handler="Upload" class="btn btn-success" type="submit" value="Upload!"/>
+        </dl>
+    </form>
+</div>
+
+<div class="align-content-center">
+    <form method="post">
+        <input asp-page-handler="RunTests" class="btn btn-primary btn-lg" type="submit" value="Run tests">
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Assembly name</th>
+        <th scope="col">Amount of successful tests</th>
+        <th scope="col">Amount of unsuccessful tests</th>
+        <th scope="col">Date</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (var info in Model.TestInfos)
+    {
+        @foreach (var assemblyInfo in info.AssembliesTestInfo)
+        {
+            <tr data-bs-toggle="collapse" data-bs-target="#methods_@assemblyInfo.AssemblyTestInfoDbId">
+                <td>
+                    <button class="btn btn-outline-dark" type="button">
+                        @assemblyInfo.Name
+                    </button>
+                </td>
+                <td>@assemblyInfo.GetSuccessfulTestsCount()</td>
+                <td>@assemblyInfo.GetUnsuccessfulTestsCount()</td>
+                <td>@info.TestDate</td>
+            </tr>
+            
+            <tr class="collapse" id="methods_@assemblyInfo.AssemblyTestInfoDbId">
+                <td colspan="6">
+                    <div class="collapse" id="methods_@assemblyInfo.AssemblyTestInfoDbId">
+                        <table class="table">
+                            <tr>
+                                <th>Class name</th>
+                                <th>Status</th>
+                            </tr>
+                            
+                            @foreach (var classInfo in assemblyInfo.ClassesInfo)
+                            {
+                                string color = classInfo.State == ClassState.Passed
+                                    ? "table-success"
+                                    : "table-warning";
+
+                                <tr class="@color">
+                                    <td>@classInfo.Name</td>
+                                    <td>@classInfo.State</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                    
+                    <div class="collapse" id="methods_@assemblyInfo.AssemblyTestInfoDbId">
+                        <table class="table">
+                            <tr>
+                                <th>Method name</th>
+                                <th>Status</th>
+                                <th>Ignore message</th>
+                                <th>Completion time</th>
+                                <th>Thrown exception</th>
+                                <th>Expected exception</th>
+                            </tr>
+
+                            @foreach (var methodInfo in assemblyInfo.ClassesInfo.SelectMany(classInfo => classInfo.MethodsInfo))
+                            {
+                                string color;
+                                if (methodInfo.State == TestState.Passed)
+                                {
+                                    color = "table-success";
+                                }
+                                else if (methodInfo.State == TestState.Ignored)
+                                {
+                                    color = "table-warning";
+                                }
+                                else
+                                {
+                                    color = "table-danger";
+                                }
+                                
+                                <tr class="@color">
+                                    <td>@methodInfo.Name</td>
+                                    <td>@methodInfo.State</td>
+                                    <td>@methodInfo.Ignored</td>
+                                    <td>@methodInfo.CompletionTime</td>
+                                    <td>@methodInfo.ActualExceptionType</td>
+                                    <td>@methodInfo.ExpectedExceptionType</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </td> 
+            </tr>
+        }
+    }
+    </tbody>
+</table>
